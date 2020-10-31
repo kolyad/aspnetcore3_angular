@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WorldCities.Data.Models
 {
@@ -21,6 +22,7 @@ namespace WorldCities.Data.Models
         /// <summary>
         /// City name (in ASCII format)
         /// </summary>
+        [JsonPropertyName("NameEng")]
         public string Name_ASCII { get; set; }
         /// <summary>
         /// City latitude
