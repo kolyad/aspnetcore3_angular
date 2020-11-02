@@ -4,6 +4,14 @@
   <p *ngIf="this.id && !city"><em>Loading...</em></p>
 
   <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="form.invalid && form.errors?.isDupeCity"
+         class="alert alert-danger">
+      <strong>ERROR</strong>:
+      A city with the same <i>name</i>, <i>lat</i>,
+      <i>lon</i> and <i>country</i> already exists.
+    </div>
+
     <div class="form-group">
       <!--
     <div class="form-group" [ngClass]="{ 'has-error hasfeedback'
@@ -15,6 +23,12 @@
              formControlName="name" required
              placeholder="City name..."
              class="form-control" />
+      <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('name').errors?.required">
+          Name is required.
+        </div>
+      </div>
       <!--
     <span *ngIf="hasError('name')"
     class="glyphicon glyphicon-remove form-controlfeedback"
@@ -36,6 +50,12 @@
              formControlName="lat" required
              placeholder="Latitude..."
              class="form-control" />
+      <div *ngIf="form.get('lat').invalid && (form.get('lat').dirty || form.get('lat').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('lat').errors?.required">
+          Latitude is required.
+        </div>
+      </div>
       <!--
     <span *ngIf="hasError('lat')"
     class="glyphicon glyphicon-remove form-controlfeedback"
@@ -58,6 +78,12 @@
              formControlName="lon" required
              placeholder="Latitude..."
              class="form-control" />
+      <div *ngIf="form.get('lon').invalid && (form.get('lon').dirty || form.get('lon').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('lon').errors?.required">
+          Longitude is required.
+        </div>
+      </div>
       <!--
     <span *ngIf="hasError('lon')"
     class="glyphicon glyphicon-remove form-controlfeedback"
@@ -82,16 +108,24 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <div *ngIf="form.get('countryId').invalid && (form.get('countryId').dirty || form.get('countryId').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('countryId').errors?.required">
+          Please select a Country.
+        </div>
+      </div>
     </div>
 
     <div class="form-group commands">
       <button *ngIf="id" type="submit"
               (click)="onSubmit()"
+              [disabled]="form.invalid"
               class="btn btn-success">
         Save
       </button>
       <button *ngIf="!id" type="submit"
               (click)="onSubmit()"
+              [disabled]="form.invalid"
               class="btn btn-success">
         Create
       </button>

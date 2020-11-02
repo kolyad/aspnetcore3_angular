@@ -113,5 +113,18 @@ namespace WorldCities.Controllers
         {
             return _context.Countries.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        [Route("IsDupeField")]
+        public bool IsDupeField(int countryId, string fieldName, string fieldValue)
+        {
+            return fieldName switch
+            {
+                "name" => _context.Countries.Any(c => c.Name == fieldValue && c.Id != countryId),
+                "iso2" => _context.Countries.Any(c => c.ISO2 == fieldValue && c.Id != countryId),
+                "iso3" => _context.Countries.Any(c => c.ISO3 == fieldValue && c.Id != countryId),
+                _ => false,
+            };
+        }
     }
 }
