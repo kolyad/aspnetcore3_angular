@@ -1,11 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, AbstractControl,  AsyncValidatorFn} from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { City } from './City';
 import { Country } from './../countries/country';
+
+import { BaseFormComponent } from '../base.form.component';
 
 @Component({
   selector: 'app-city-edit',
@@ -13,7 +16,8 @@ import { Country } from './../countries/country';
   styleUrls: ['./city-edit.component.css']
 })
 
-export class CityEditComponent {
+export class CityEditComponent
+  extends BaseFormComponent {
 
   // the view title
   title: string;
@@ -32,18 +36,20 @@ export class CityEditComponent {
   // the countries array for the select
   countries: Country[];
 
+  
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string) {
+    super();
   }
 
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
-      lat: new FormControl('', Validators.required),
-      lon: new FormControl('', Validators.required),
+      lat: new FormControl('', [Validators.required, Validators.pattern("^-?(([0-8]?[0-9]|[0-9])(\.[0-9]{1,4})?|90(\.[0]{1,4})?)$")]),
+      lon: new FormControl('', [Validators.required, Validators.pattern("^-?(([1]?[0-7]?[0-9]|[0-9]?[0-9]|[0-9])(\.[0-9]{1,4})?|180(\.[0]{1,4})?)$")]),
       countryId: new FormControl('', Validators.required)
     }, null, this.isDupeCity());
     this.loadData();
@@ -118,7 +124,7 @@ export class CityEditComponent {
   }
 
   isDupeCity(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<{[key: string]: any} | null> => {
+    return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
       var city = <City>{};
       city.id = (this.id) ? this.id : 0;
       city.name = this.form.get("name").value;

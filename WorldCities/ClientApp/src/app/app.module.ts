@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
+import { BaseFormComponent } from './base.form.component';
 
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
@@ -22,6 +23,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
+    BaseFormComponent,
     NavMenuComponent,
     HomeComponent,
     CitiesComponent,
