@@ -10,7 +10,7 @@ using WorldCities.Data;
 namespace WorldCities
 {
     public class Startup
-    {
+    {     
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

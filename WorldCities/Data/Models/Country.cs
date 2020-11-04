@@ -29,6 +29,7 @@ namespace WorldCities.Data.Models
         /// <summary>
         /// A list containing all the cities related to this country.
         /// </summary>
+        [JsonIgnore]
         public virtual List<City> Cities { get; set; }
     }
 }
