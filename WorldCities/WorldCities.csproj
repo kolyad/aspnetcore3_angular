@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\base.service.ts" />
     <None Remove="ClientApp\src\app\base.form.component.ts" />
   </ItemGroup>
 
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\base.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\base.form.component.ts" />
   </ItemGroup>
 
