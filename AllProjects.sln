@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCheck", "HealthCheck\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCities", "WorldCities\WorldCities.csproj", "{44C0F868-0258-4C4D-A3CF-3E1E3CCBB2D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCities.Tests", "WorldCities.Tests\WorldCities.Tests.csproj", "{31F539E0-C8F3-409B-B553-394E639574D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{44C0F868-0258-4C4D-A3CF-3E1E3CCBB2D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44C0F868-0258-4C4D-A3CF-3E1E3CCBB2D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44C0F868-0258-4C4D-A3CF-3E1E3CCBB2D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F539E0-C8F3-409B-B553-394E639574D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F539E0-C8F3-409B-B553-394E639574D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F539E0-C8F3-409B-B553-394E639574D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F539E0-C8F3-409B-B553-394E639574D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
