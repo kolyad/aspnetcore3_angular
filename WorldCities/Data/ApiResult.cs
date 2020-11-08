@@ -61,7 +61,7 @@ namespace WorldCities.Data
 
             source = source
                 .Skip(pageIndex * pageSize)
-                .Take(pageSize);
+                .Take(pageSize);            
 
             var data = await source.ToListAsync();
 

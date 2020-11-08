@@ -36,6 +36,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\base.service.ts" />
     <None Remove="ClientApp\src\app\base.form.component.ts" />
+    <None Remove="ClientApp\src\app\cities\cities.component.spec.ts" />
     <None Remove="ClientApp\src\app\cities\city.service.ts" />
     <None Remove="ClientApp\src\app\countries\country.service.ts" />
   </ItemGroup>
@@ -47,6 +48,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\base.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\base.form.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\cities\cities.component.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\cities\city.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\countries\country.service.ts" />
   </ItemGroup>
