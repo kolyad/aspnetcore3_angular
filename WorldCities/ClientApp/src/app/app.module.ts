@@ -23,9 +23,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CityService } from './cities/city.service';
 import { CountryService } from './countries/country.service';
 
-import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
-import { AuthorizeGuard } from '../api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
+import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
+import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 
 
 @NgModule({
@@ -61,8 +61,7 @@ import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor
     CityService,
     CountryService,
     {
-      provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor,
-      multi: true
+      provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor,  multi: true
     }
   ],
   bootstrap: [AppComponent]
