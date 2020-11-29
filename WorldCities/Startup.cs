@@ -37,6 +37,8 @@ namespace WorldCities
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddEntityFrameworkSqlServer();
+
             // Add ApplicationDbContext
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -99,7 +101,7 @@ namespace WorldCities
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
 
-                //endpoints.MapRazorPages();
+                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>
