@@ -13,7 +13,9 @@ import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } fr
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
+
   public message = new BehaviorSubject<string>(null);
 
   constructor(

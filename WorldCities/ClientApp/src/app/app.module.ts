@@ -61,7 +61,9 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     CityService,
     CountryService,
     {
-      provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor,  multi: true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizeInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
