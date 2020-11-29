@@ -2,16 +2,17 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+using AuthSample.Data;
+using AuthSample.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using WorldCities.Data;
-using WorldCities.Data.Models;
 
-namespace WorldCities
+namespace AuthSample
 {
     public class Startup
     {
@@ -25,43 +26,25 @@ namespace WorldCities
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.WriteIndented = true;
-                });
-
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-
-            // Add ApplicationDbContext
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                var conf = Configuration.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(conf);
-            });
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-            // Add ASP.NET Core Identity support
-            services.AddDefaultIdentity<ApplicationUser>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequiredLength = 8;
-            })
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +53,7 @@ namespace WorldCities
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -79,9 +63,7 @@ namespace WorldCities
             }
 
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -92,20 +74,21 @@ namespace WorldCities
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-
-                //endpoints.MapRazorPages();
+                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>
             {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
                 spa.Options.SourcePath = "ClientApp";
-                spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
+
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
